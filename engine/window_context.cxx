@@ -64,16 +64,19 @@ public:
     }
     glfwTerminate();
   }
-  void run()
+  bool should_close()
   {
-    while(!glfwWindowShouldClose(m_window))
-    {
-        glfwPollEvents();
-        glClearColor(0.13, 0.09, 0.20, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glfwSwapBuffers(m_window);
-    }
+    return glfwWindowShouldClose(m_window);
+  }
+  void start_frame()
+  {
+    glfwPollEvents();
+    glClearColor(0.13, 0.09, 0.20, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+  }
+  void end_frame()
+  {
+    glfwSwapBuffers(m_window);
   }
 private:
    GLFWwindow * m_window{nullptr};
